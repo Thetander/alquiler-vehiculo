@@ -1,85 +1,28 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+Sistema de Gestión de Alquiler de Vehículos
+Este proyecto consiste en el desarrollo de un sistema integral para la gestión de alquileres de vehículos, diseñado para satisfacer las necesidades de administradores, empleados y clientes. El sistema permite la gestión eficiente del inventario de vehículos, la administración de alquileres y devoluciones, la supervisión de usuarios y el análisis del rendimiento del negocio mediante reportes y estadísticas.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ yarn install
-```
-
-## Compile and run the project
-
-```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Funcionalidades Principales
+Administrador
+Gestión de Usuarios: Crear, editar, asignar permisos o eliminar usuarios.
+Gestión de Vehículos: Añadir nuevos vehículos al inventario, editar datos (modelo, matrícula, etc.) y gestionar el estado de los vehículos (disponibles o en mantenimiento).
+Reportes y Estadísticas: Generar reportes sobre el uso de vehículos, ingresos por alquileres y demanda de vehículos.
+Gestión de Tarifas: Establecer tarifas según el tipo de vehículo, duración del alquiler o temporada.
+Empleado o Agente de Alquiler
+Gestión de Alquileres: Registrar y gestionar alquileres, verificar disponibilidad, y emitir contratos y facturas.
+Gestión de Devoluciones: Registrar devoluciones, inspeccionar el estado de los vehículos y calcular cargos adicionales.
+Consulta de Disponibilidad: Verificar la disponibilidad de vehículos en tiempo real.
+Facturación y Pagos: Emitir facturas y gestionar pagos.
+Cliente
+Consulta de Vehículos Disponibles: Navegar por el catálogo de vehículos y filtrar por características.
+Reserva de Vehículos: Realizar reservas seleccionando fechas y vehículos deseados.
+Historial de Alquileres: Consultar el historial de alquileres y facturas.
+Gestión de Pagos: Realizar pagos en línea y consultar el estado de los mismos.
+Requerimientos del Sistema
+Registro y Gestión de Usuarios: Manejo de roles (Administrador, Empleado, Cliente).
+Gestión de Vehículos: Agregar, modificar, eliminar y consultar vehículos.
+Módulo de Alquiler: Gestionar el ciclo completo del alquiler, desde la reserva hasta la devolución.
+Control de Disponibilidad: Consultar la disponibilidad en tiempo real.
+Gestión de Pagos y Facturación: Manejar diferentes métodos de pago y generar facturas automáticas.
+Reportes y Estadísticas: Generar reportes sobre el rendimiento del negocio.
+Tecnologías a Utilizar
+El proyecto se desarrollará utilizando tecnologías modernas para el frontend, backend y base de datos, que serán seleccionadas por el equipo de desarrollo para cumplir con los requisitos del sistema.
