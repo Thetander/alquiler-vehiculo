@@ -22,6 +22,7 @@ import { RolesModule } from './roles/applications/modules/roles.module';
 import { RolesPermisosModule } from './roles-permisos/applications/modules/roles-permisos.module';
 import { UsuariosModule } from './usuarios/applications/modules/usuarios.module';
 import { VehiculosModule } from './vehiculos/applications/modules/vehiculos.module';
+import { AuthModule } from './auth/applications/modules/auth.module';
 
 @Module({
   imports: [
@@ -70,7 +71,8 @@ import { VehiculosModule } from './vehiculos/applications/modules/vehiculos.modu
     RolesModule,
     RolesPermisosModule,
     UsuariosModule,
-    VehiculosModule
+    VehiculosModule,
+    AuthModule,
 
   ],
   controllers: [AppController],
