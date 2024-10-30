@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
 
-import { ProvinciasController } from '../../infrastructure/controllers/provincias.controller';
-import { ProvinciasService } from '../services/provincias.service';
-import { ProvinciaEntity } from 'src/provincias/domain/entities/provincias.entity';
+import { ProvinciaController } from '../../infrastructure/controllers/provincias.controller';
+import { ProvinciaService } from '../services/provincias.service';
+import { ProvinciaEntity } from '../../domain/entities/provincias.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ProvinciaEntity])],
-  controllers: [ProvinciasController],
-  providers: [ProvinciasService]
+  controllers: [ProvinciaController],
+  providers: [ProvinciaService],
+  exports:[ProvinciaService],
 })
 export class ProvinciasModule {}
