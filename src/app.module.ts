@@ -23,6 +23,8 @@ import { RolesPermisosModule } from './roles-permisos/applications/modules/roles
 import { UsuariosModule } from './usuarios/applications/modules/usuarios.module';
 import { VehiculosModule } from './vehiculos/applications/modules/vehiculos.module';
 import { AuthModule } from './auth/applications/modules/auth.module';
+import { InfrastructureModule } from './tipo-vehiculo/applications/modules/tipo-vehiculo.module';
+import { TipoVehiculoController } from './tipo-vehiculo/infrastructure/controllers/tipo-vehiculo.controller';
 
 @Module({
   imports: [
@@ -73,9 +75,10 @@ import { AuthModule } from './auth/applications/modules/auth.module';
     UsuariosModule,
     VehiculosModule,
     AuthModule,
+    InfrastructureModule,
 
   ],
-  controllers: [AppController],
+  controllers: [AppController, TipoVehiculoController],
   providers: [AppService],
 })
 export class AppModule { }
