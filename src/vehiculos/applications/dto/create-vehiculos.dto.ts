@@ -1,10 +1,5 @@
-import { IsString, MaxLength, IsBoolean, IsDateString, IsNumber, IsEnum } from 'class-validator';
-
-export enum TipoVehiculo {
-    SUV = 'SUV',
-    SEDAN = 'Sedan',
-    CAMIONETA = 'Camioneta',
-}
+// create-vehiculo.dto.ts
+import { IsString, MaxLength, IsBoolean, IsDateString, IsNumber } from 'class-validator';
 
 export class CreateVehiculoDto {
     @IsString()
@@ -46,8 +41,8 @@ export class CreateVehiculoDto {
     @IsNumber()
     kilometraje: number;
 
-    @IsEnum(TipoVehiculo)
-    tipoVehiculo: TipoVehiculo;
+    @IsNumber()
+    idTipoVehiculo: number;  
 
     @IsNumber()
     idEstado: number;

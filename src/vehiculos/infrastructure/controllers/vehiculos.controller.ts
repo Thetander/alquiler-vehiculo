@@ -3,7 +3,6 @@ import { ApiTags } from '@nestjs/swagger';
 import { VehiculoService } from 'src/vehiculos/applications/services/vehiculos.service';
 import { CreateVehiculoDto } from 'src/vehiculos/applications/dto/create-vehiculos.dto';
 import { EditVehiculoDto } from 'src/vehiculos/applications/dto/update-vehiculos.dto';
-import { VehiculoEntity } from 'src/vehiculos/domain/entities/vehiculos.entity/vehiculos.entity';
 
 @ApiTags('vehiculos')
 @Controller('vehiculos')
@@ -11,7 +10,7 @@ export class VehiculoController {
     constructor(private readonly vehiculoService: VehiculoService) {}
 
     @Get()
-    async getMany(@Query('filter') filter: string) {
+    async getMany(@Query('filter') filter: number) {
         const data = filter ? await this.vehiculoService.getFiltered(filter) : await this.vehiculoService.getMany();
         return { data };
     }

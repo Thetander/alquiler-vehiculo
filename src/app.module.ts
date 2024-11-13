@@ -23,8 +23,8 @@ import { RolesPermisosModule } from './roles-permisos/applications/modules/roles
 import { UsuariosModule } from './usuarios/applications/modules/usuarios.module';
 import { VehiculosModule } from './vehiculos/applications/modules/vehiculos.module';
 import { AuthModule } from './auth/applications/modules/auth.module';
-import { InfrastructureModule } from './tipo-vehiculo/applications/modules/tipo-vehiculo.module';
-import { TipoVehiculoController } from './tipo-vehiculo/infrastructure/controllers/tipo-vehiculo.controller';
+import { InfrastructureModule } from './tipos-vehiculos/applications/modules/tipo-vehiculo.module';
+import { TipoVehiculoController } from './tipos-vehiculos/infrastructure/controllers/tipo-vehiculo.controller';
 
 @Module({
   imports: [
