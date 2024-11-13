@@ -1,4 +1,3 @@
-// vehiculos.entity.ts
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { TipoVehiculoEntity } from '../../../../tipos-vehiculos/domain/entities/tipos-vehiculos.entity';
 
