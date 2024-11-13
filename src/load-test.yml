@@ -1,0 +1,47 @@
+config:
+  target: 'http://localhost:3000'
+  phases:
+    - duration: 30  
+      arrivalRate: 2  
+  defaults:
+    headers:
+      Content-Type: application/json
+
+scenarios:
+  - name: 'Prueba de flujo de CRUD de vehículos'
+    flow:
+      - get:
+          url: '/vehiculos'
+          expect:
+            - statusCode: 200
+      - post:
+          url: '/vehiculos'
+          json:
+            matricula: "AUTO-{{ $randomString(5) }}"
+            modelo: "ModelY"
+            marca: "BrandZ"
+            color: "Green"
+            fechaFabricacion: "2022-06-15"
+            numMotor: "MOT-{{ $randomString(7) }}"
+            numSerie: "SER-{{ $randomString(10) }}"
+            disponible: true
+            mantenimiento: false
+            precioAlqDia: 75.0
+            kilometraje: 12000.5
+            tipoVehiculo: "Camioneta"
+            idEstado: 1
+          capture:
+            - json: '$.idVehiculo'
+              as: 'vehiculoId'
+          expect:
+            - statusCode: 201
+      - put:
+          url: '/vehiculos/{{ vehiculoId }}'
+          json:
+            color: "Blue"
+          expect:
+            - statusCode: 200
+      - delete:
+          url: '/vehiculos/{{ vehiculoId }}'
+          expect:
+            - statusCode: 200

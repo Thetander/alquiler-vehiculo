@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
-import { DireccionEntity } from '../../../direcciones/domain/entities/direcciones.entity';
-import { UsuarioEntity } from '../../../usuarios/domain/entities/usuarios.entity';
+import { DireccionEntity } from 'src/direcciones/domain/entities/direcciones.entity';
+import { UsuarioEntity } from 'src/usuarios/domain/entities/usuarios.entity';
 
 @Entity('personas')
 export class PersonaEntity {
@@ -24,9 +24,6 @@ export class PersonaEntity {
 
     @Column({ type: 'varchar', length: 100 })
     telefono: string;
-
-    @Column({ type: 'varchar', length: 100, unique: true })
-    email: string;
 
     @ManyToOne(() => DireccionEntity, (direccion) => direccion.personas)
     @JoinColumn({ name: 'idDireccion' })

@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { RolesPermisosEntity } from '../../../roles-permisos/domain/entities/roles-permisos.entity';
-import { MenuRolEntity } from '../../../menus-roles/domain/entities/menus-roles.entity';
+import { RolesPermisosEntity } from 'src/roles-permisos/domain/entities/roles-permisos.entity';
+import { MenuRolEntity } from 'src/menus-roles/domain/entities/menus-roles.entity';
 
 @Entity('roles')
 export class RolEntity {

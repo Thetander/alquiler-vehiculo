@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { VehiculoEntity } from '../../domain/entities/vehiculos.entity/vehiculos.entity';
+import { Repository, FindOptionsWhere, Like } from 'typeorm';
+import { VehiculoEntity } from 'src/vehiculos/domain/entities/vehiculos.entity/vehiculos.entity';
 import { CreateVehiculoDto } from '../dto/create-vehiculos.dto';
 import { EditVehiculoDto } from '../dto/update-vehiculos.dto';
 
@@ -14,6 +14,10 @@ export class VehiculoService {
 
     async getMany() {
         return await this.vehiculoRepository.find();
+    }
+
+    async getFiltered(filter: string) {
+        return await this.vehiculoRepository.find({ where: { tipoVehiculo: filter } });
     }
 
     async getOne(idVehiculo: number) {

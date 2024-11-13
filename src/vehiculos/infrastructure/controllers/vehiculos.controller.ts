@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { VehiculoService } from '../../applications/services/vehiculos.service';
-import { CreateVehiculoDto } from '../../applications/dto/create-vehiculos.dto';
-import { EditVehiculoDto } from '../../applications/dto/update-vehiculos.dto';
+import { VehiculoService } from 'src/vehiculos/applications/services/vehiculos.service';
+import { CreateVehiculoDto } from 'src/vehiculos/applications/dto/create-vehiculos.dto';
+import { EditVehiculoDto } from 'src/vehiculos/applications/dto/update-vehiculos.dto';
+import { VehiculoEntity } from 'src/vehiculos/domain/entities/vehiculos.entity/vehiculos.entity';
 
 @ApiTags('vehiculos')
 @Controller('vehiculos')
@@ -10,8 +11,8 @@ export class VehiculoController {
     constructor(private readonly vehiculoService: VehiculoService) {}
 
     @Get()
-    async getMany() {
-        const data = await this.vehiculoService.getMany();
+    async getMany(@Query('filter') filter: string) {
+        const data = filter ? await this.vehiculoService.getFiltered(filter) : await this.vehiculoService.getMany();
         return { data };
     }
 

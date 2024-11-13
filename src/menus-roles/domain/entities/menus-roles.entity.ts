@@ -1,6 +1,6 @@
 import { Entity, ManyToOne, JoinColumn, PrimaryColumn } from 'typeorm';
-import { RolEntity } from '../../../roles/domain/entities/roles.entity';
-import { MenuEntity } from '../../../menus/domain/entities/menus.entity';
+import { RolEntity } from 'src/roles/domain/entities/roles.entity';
+import { MenuEntity } from 'src/menus/domain/entities/menus.entity';
 
 @Entity('menus_roles')
 export class MenuRolEntity {

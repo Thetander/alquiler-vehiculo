@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { PersonaEntity } from '../../../personas/domain/entities/personas.entity';
+import { PersonaEntity } from 'src/personas/domain/entities/personas.entity';
 import { CreatePersonaDto } from '../dto/create-personas.dto';
 import { EditPersonaDto } from '../dto/update-personas.dto';
 

@@ -12,8 +12,8 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateUser(idPersona: number, pass: string): Promise<any> {
-    const usuario = await this.usuarioService.findOne({ idUsuario: idPersona });
+  async validateUser(email: string, pass: string): Promise<any> {
+    const usuario = await this.usuarioService.findOne({ email });
 
     if (usuario && await compare(pass, usuario.password)) {
       return usuario;
@@ -22,8 +22,8 @@ export class AuthService {
   }
 
   async login(loginDto: LoginDto) {
-    const { idPersona, password } = loginDto;
-    const usuario = await this.validateUser(idPersona, password);
+    const { email, password } = loginDto;
+    const usuario = await this.validateUser(email, password);
     if (!usuario) {
       throw new Error('Credenciales inválidas');
     }

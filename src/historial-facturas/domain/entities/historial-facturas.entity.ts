@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { ClienteEntity } from '../../../clientes/domain/entities/clientes.entity';
+import { ClienteEntity } from 'src/clientes/domain/entities/clientes.entity';
 import { ReservaAlquilerEntity } from 'src/reserva-alquiler/domain/entities/reserva-alquiler.entity';
 
 @Entity('historial_facturas')

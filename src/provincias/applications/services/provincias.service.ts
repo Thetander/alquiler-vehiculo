@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateProvinciaDto } from '../../applications/dto/create-provincias.dto';
 import { EditProvinciaDto } from '../../applications/dto/update-provincias.dto';
-import { ProvinciaEntity } from '../../domain/entities/provincias.entity';
+import { ProvinciaEntity } from 'src/provincias/domain/entities/provincias.entity';
 
 @Injectable()
 export class ProvinciaService {

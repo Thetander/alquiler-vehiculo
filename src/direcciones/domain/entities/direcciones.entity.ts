@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
-import { CiudadEntity } from '../../../ciudades/domain/entities/ciudades.entity';
+import { CiudadEntity } from 'src/ciudades/domain/entities/ciudades.entity';
 import { PersonaEntity } from 'src/personas/domain/entities/personas.entity';
 
 

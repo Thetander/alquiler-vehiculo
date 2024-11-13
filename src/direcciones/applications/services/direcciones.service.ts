@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateDireccionDto } from '../dto/create-direcciones.dto';
 import { EditDireccionDto } from '../dto/update-direcciones.dto';
-import { DireccionEntity } from '../../domain/entities/direcciones.entity';
+import { DireccionEntity } from 'src/direcciones/domain/entities/direcciones.entity';
 
 @Injectable()
 export class DireccionService {

@@ -29,10 +29,6 @@ export class CreatePersonaDto {
     @MaxLength(100)
     telefono: string;
 
-    @IsString()
-    @MaxLength(100)
-    email: string;
-
     @IsOptional()
     @IsNumber()
     idDireccion?: number;

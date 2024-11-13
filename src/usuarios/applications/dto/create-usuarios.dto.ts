@@ -1,4 +1,6 @@
-import { IsString, IsEnum, IsNumber } from 'class-validator';
+import { hash } from 'bcryptjs';
+import { IsString, IsEnum, IsNumber, MaxLength } from 'class-validator';
+import { BeforeInsert, BeforeUpdate } from 'typeorm';
 
 export enum Rol {
     ADMINISTRADOR = 'Administrador',
@@ -15,6 +17,10 @@ export class CreateUsuarioDto {
     @IsString()
     password: string;
 
+    @IsString()
+    @MaxLength(100)
+    email:string;
+
     @IsEnum(Rol)
     rol: Rol;
 
@@ -23,4 +29,5 @@ export class CreateUsuarioDto {
 
     @IsNumber()
     idPersona: number;
+  
 }

@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UsuarioEntity } from '../../../usuarios/domain/entities/usuarios.entity';
-import { CreateUsuarioDto } from '../dto/create-usuarios.dto';
-import { EditUsuarioDto } from '../dto/update-usuarios.dto';
+import { UsuarioEntity } from 'src/usuarios/domain/entities/usuarios.entity';
+import { CreateUsuarioDto } from 'src/usuarios/applications/dto/create-usuarios.dto';
+import { EditUsuarioDto } from 'src/usuarios/applications/dto/update-usuarios.dto';
 
 
 export interface UsuarioFindOne {

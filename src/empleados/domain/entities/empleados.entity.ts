@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 
-import { CargoEntity } from '../../../cargos/domain/entities/cargos.entity';
+import { CargoEntity } from 'src/cargos/domain/entities/cargos.entity';
 import { PersonaEntity } from 'src/personas/domain/entities/personas.entity';
 
 @Entity('empleados')

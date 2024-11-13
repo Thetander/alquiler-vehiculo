@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { EmpleadoEntity } from '../../../empleados/domain/entities/empleados.entity';
-import { ClienteEntity } from '../../../clientes/domain/entities/clientes.entity';
+import { EmpleadoEntity } from 'src/empleados/domain/entities/empleados.entity';
+import { ClienteEntity } from 'src/clientes/domain/entities/clientes.entity';
 import { VehiculoEntity } from 'src/vehiculos/domain/entities/vehiculos.entity/vehiculos.entity';
 
 
