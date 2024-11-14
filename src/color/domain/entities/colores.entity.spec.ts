@@ -1,7 +1,7 @@
-import { ColoresEntity } from '../colores.entity';
+import { ColorEntity } from './colores.entity';
 
 describe('ColoresEntity', () => {
   it('should be defined', () => {
-    expect(new ColoresEntity()).toBeDefined();
+    expect(new ColorEntity()).toBeDefined();
   });
 });
