@@ -25,6 +25,10 @@ import { VehiculosModule } from './vehiculos/applications/modules/vehiculos.modu
 import { AuthModule } from './auth/applications/modules/auth.module';
 import { InfrastructureModule } from './tipos-vehiculos/applications/modules/tipo-vehiculo.module';
 import { TipoVehiculoController } from './tipos-vehiculos/infrastructure/controllers/tipo-vehiculo.controller';
+import { ColorController } from './color/infrastructure/controllers/color.controller';
+import { ColorModule } from './color/applications/modules/color.module';
+import { ModulesModule } from './color/applications/modules/color.module';
+import { Service } from './color/applications/services/color.service';
 
 @Module({
   imports: [
@@ -76,9 +80,11 @@ import { TipoVehiculoController } from './tipos-vehiculos/infrastructure/control
     VehiculosModule,
     AuthModule,
     InfrastructureModule,
+    ColorModule,
+    ModulesModule,
 
   ],
-  controllers: [AppController, TipoVehiculoController],
-  providers: [AppService],
+  controllers: [AppController, TipoVehiculoController, ColorController],
+  providers: [AppService, Service],
 })
 export class AppModule { }
