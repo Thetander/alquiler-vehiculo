@@ -26,9 +26,8 @@ import { AuthModule } from './auth/applications/modules/auth.module';
 import { InfrastructureModule } from './tipos-vehiculos/applications/modules/tipo-vehiculo.module';
 import { TipoVehiculoController } from './tipos-vehiculos/infrastructure/controllers/tipo-vehiculo.controller';
 import { ColorController } from './color/infrastructure/controllers/color.controller';
-import { ColorModule } from './color/applications/modules/color.module';
-import { ModulesModule } from './color/applications/modules/color.module';
-import { Service } from './color/applications/services/color.service';
+import { ColorService } from 'src/color/applications/services/color.service';
+import { ColorModule } from 'src/color/applications/modules/color.module';
 import { MarcaModule } from './marca/applications/modules/marca.module';
 import { MarcaService } from './marca/applications/services/marca.service';
 import { MarcaController } from './marca/infrastructure/controllers/marca.controller';
@@ -87,12 +86,11 @@ import { ModeloModule } from './modelo/applications/modules/modelo.module';
     AuthModule,
     InfrastructureModule,
     ColorModule,
-    ModulesModule,
     MarcaModule,
     ModeloModule,
 
   ],
-  controllers: [AppController, TipoVehiculoController, ColorController, MarcaController, ModeloController],
-  providers: [AppService, Service, MarcaService, ModeloService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule { }

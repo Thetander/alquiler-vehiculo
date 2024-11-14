@@ -13,7 +13,7 @@ export class CiudadService {
     ) {}
 
     async getMany() {
-        return await this.ciudadRepository.find();
+        return this.ciudadRepository.find();
     }
 
     async getOne(idCiudad: number) {

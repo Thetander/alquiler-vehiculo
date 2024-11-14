@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { ApiGatewayTimeoutResponse, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateColorDto, UpdateColor } from 'color/applications/dto';
 import { ColorService } from 'color/applications/services/color.service';
 
