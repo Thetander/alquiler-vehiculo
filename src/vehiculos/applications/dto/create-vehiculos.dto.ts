@@ -1,4 +1,3 @@
-// create-vehiculo.dto.ts
 import { IsString, MaxLength, IsBoolean, IsDateString, IsNumber } from 'class-validator';
 
 export class CreateVehiculoDto {
@@ -6,17 +5,14 @@ export class CreateVehiculoDto {
     @MaxLength(100)
     matricula: string;
 
-    @IsString()
-    @MaxLength(100)
-    modelo: string;
+    @IsNumber()
+    idModelo: number;
 
-    @IsString()
-    @MaxLength(100)
-    marca: string;
+    @IsNumber()
+    idMarca: number;
 
-    @IsString()
-    @MaxLength(100)
-    color: string;
+    @IsNumber()
+    idColor: number;
 
     @IsDateString()
     fechaFabricacion: string;
@@ -46,4 +42,18 @@ export class CreateVehiculoDto {
 
     @IsNumber()
     idEstado: number;
+
+    @IsNumber()
+    capacidad: number;
+
+    @IsNumber()
+    nroPuertas: number;
+
+    @IsString()
+    @MaxLength(20)
+    transmision: string;
+
+    @IsString()
+    @MaxLength(255)
+    imagen: string;
 }

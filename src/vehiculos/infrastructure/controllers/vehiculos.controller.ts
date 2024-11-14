@@ -10,8 +10,9 @@ export class VehiculoController {
     constructor(private readonly vehiculoService: VehiculoService) {}
 
     @Get()
-    async getMany(@Query('filter') filter: number) {
-        const data = filter ? await this.vehiculoService.getFiltered(filter) : await this.vehiculoService.getMany();
+    async getMany(@Query('marca') marca?: string, @Query('modelo') modelo?: string, @Query('color') color?: string, @Query('tipoVehiculo') tipoVehiculo?: string) {
+        const filters = { marca, modelo, color, tipoVehiculo };
+        const data = await this.vehiculoService.getMany(filters);
         return { data };
     }
 

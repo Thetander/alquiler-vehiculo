@@ -1,5 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { TipoVehiculoEntity } from '../../../../tipos-vehiculos/domain/entities/tipos-vehiculos.entity';
+import { ColorEntity } from 'color/domain/entities/colores.entity';
+import { MarcaEntity } from 'marca/domain/entities/marca.entity';
+import { ModeloEntity } from 'modelo/domain/entities/modelo.entity';
 
 @Entity('vehiculos')
 export class VehiculoEntity {
@@ -9,14 +12,17 @@ export class VehiculoEntity {
     @Column({ type: 'varchar', length: 100 })
     matricula: string;
 
-    @Column({ type: 'varchar', length: 100 })
-    modelo: string;
+    @ManyToOne(() => ColorEntity, { eager: true })
+    @JoinColumn({ name: 'idColor' })
+    color: ColorEntity;
 
-    @Column({ type: 'varchar', length: 100 })
-    marca: string;
+    @ManyToOne(() => MarcaEntity, { eager: true })
+    @JoinColumn({ name: 'idMarca' })
+    marca: MarcaEntity;
 
-    @Column({ type: 'varchar', length: 100 })
-    color: string;
+    @ManyToOne(() => ModeloEntity, { eager: true })
+    @JoinColumn({ name: 'idModelo' })
+    modelo: ModeloEntity;
 
     @Column({ type: 'date' })
     fechaFabricacion: Date;
@@ -45,4 +51,17 @@ export class VehiculoEntity {
 
     @Column()
     idEstado: number;
+    
+    @Column({ type: 'int' })
+    capacidad: number;
+
+    @Column({ type: 'int' })
+    nroPuertas: number;
+
+    @Column({ type: 'varchar', length: 20 })
+    transmision: string; 
+
+    @Column({ type: 'varchar', length: 255, nullable: true })
+    imagen: string; 
+
 }

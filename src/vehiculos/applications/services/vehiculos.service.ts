@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeepPartial, Repository } from 'typeorm';
 import { VehiculoEntity } from 'src/vehiculos/domain/entities/vehiculos.entity/vehiculos.entity';
 import { CreateVehiculoDto } from '../dto/create-vehiculos.dto';
 import { EditVehiculoDto } from '../dto/update-vehiculos.dto';
@@ -12,10 +12,30 @@ export class VehiculoService {
         private readonly vehiculoRepository: Repository<VehiculoEntity>,
     ) {}
 
-    async getMany() {
-        return await this.vehiculoRepository.find();
+    async getMany(filters?: any) {
+        const queryOptions: any = {
+            relations: ['marca', 'modelo', 'color', 'tipoVehiculo'],
+        };
+    
+        if (filters) {
+            queryOptions.where = {};
+            if (filters.marca) {
+                queryOptions.where.marca = { idMarca: filters.marca };
+            }
+            if (filters.modelo) {
+                queryOptions.where.modelo = { idModelo: filters.modelo };
+            }
+            if (filters.color) {
+                queryOptions.where.color = { idColor: filters.color };
+            }
+            if (filters.tipoVehiculo) {
+                queryOptions.where.tipoVehiculo = { idTipoVehiculo: filters.tipoVehiculo };
+            }
+        }
+    
+        return await this.vehiculoRepository.find(queryOptions);
     }
-
+    
     async getFiltered(filter: number) {
         return await this.vehiculoRepository.find({ where: { tipoVehiculo: { idTipoVehiculo: filter } } });
     }
@@ -27,7 +47,7 @@ export class VehiculoService {
     }
 
     async createOne(dto: CreateVehiculoDto) {
-        const newVehiculo = this.vehiculoRepository.create(dto);
+        const newVehiculo = this.vehiculoRepository.create(dto as  DeepPartial<VehiculoEntity>);
         return await this.vehiculoRepository.save(newVehiculo);
     }
 
