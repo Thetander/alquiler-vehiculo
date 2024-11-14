@@ -29,6 +29,9 @@ import { ColorController } from './color/infrastructure/controllers/color.contro
 import { ColorModule } from './color/applications/modules/color.module';
 import { ModulesModule } from './color/applications/modules/color.module';
 import { Service } from './color/applications/services/color.service';
+import { MarcaModule } from './marca/applications/modules/marca.module';
+import { MarcaService } from './marca/applications/services/marca.service';
+import { MarcaController } from './marca/infrastructure/controllers/marca.controller';
 
 @Module({
   imports: [
@@ -82,9 +85,10 @@ import { Service } from './color/applications/services/color.service';
     InfrastructureModule,
     ColorModule,
     ModulesModule,
+    MarcaModule,
 
   ],
-  controllers: [AppController, TipoVehiculoController, ColorController],
-  providers: [AppService, Service],
+  controllers: [AppController, TipoVehiculoController, ColorController, MarcaController],
+  providers: [AppService, Service, MarcaService],
 })
 export class AppModule { }
