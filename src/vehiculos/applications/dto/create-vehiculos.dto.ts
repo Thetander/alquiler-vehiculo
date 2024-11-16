@@ -1,4 +1,4 @@
-import { IsString, MaxLength, IsBoolean, IsDateString, IsNumber } from 'class-validator';
+import { IsString, MaxLength, IsBoolean, IsDateString, IsNumber, IsOptional } from 'class-validator';
 
 export class CreateVehiculoDto {
     @IsString()
@@ -38,7 +38,7 @@ export class CreateVehiculoDto {
     kilometraje: number;
 
     @IsNumber()
-    idTipoVehiculo: number;  
+    idTipoVehiculo: number;
 
     @IsNumber()
     idEstado: number;
@@ -53,7 +53,8 @@ export class CreateVehiculoDto {
     @MaxLength(20)
     transmision: string;
 
+    @IsOptional()
     @IsString()
     @MaxLength(255)
-    imagen: string;
+    imagen?: string;
 }
