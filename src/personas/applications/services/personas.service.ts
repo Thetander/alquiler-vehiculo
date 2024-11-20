@@ -24,7 +24,8 @@ export class PersonaService {
 
     async createOne(dto: CreatePersonaDto) {
         const newPersona = this.personaRepository.create(dto);
-        return await this.personaRepository.save(newPersona);
+        const savedPersona = await this.personaRepository.save(newPersona); 
+        return savedPersona; 
     }
 
     async editOne(id: number, dto: EditPersonaDto) {

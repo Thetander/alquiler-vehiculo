@@ -23,9 +23,11 @@ export class ClienteController {
 
     @Post()
     async createOne(@Body() dto: CreateClienteDto) {
-        const data = await this.clienteService.createOne(dto);
-        return { message: 'Cliente created', data };
+      const data = await this.clienteService.createOne(dto);
+      return { message: 'Cliente created', data };
     }
+  
+
 
     @Put(':id')
     async editOne(@Param('id') id: number, @Body() dto: EditClienteDto) {

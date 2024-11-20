@@ -24,7 +24,7 @@ export class PersonaController {
     @Post()
     async createOne(@Body() dto: CreatePersonaDto) {
         const data = await this.personaService.createOne(dto);
-        return { message: 'Persona created', data };
+        return { message: 'Persona created', data: data }; 
     }
 
     @Put(':id')

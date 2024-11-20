@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UsuarioService } from '../../../usuarios/applications/services/usuarios.service';
 import { compare } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
@@ -13,7 +13,7 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
-    const usuario = await this.usuarioService.findOne({ email });
+    const usuario = await this.usuarioService.findOneByEmail(email);
 
     if (usuario && await compare(pass, usuario.password)) {
       return usuario;
@@ -25,7 +25,7 @@ export class AuthService {
     const { email, password } = loginDto;
     const usuario = await this.validateUser(email, password);
     if (!usuario) {
-      throw new Error('Credenciales inválidas');
+      throw new NotFoundException('Credenciales inválidas');
     }
 
     const payload = { sub: usuario.idUsuario, role: usuario.rol };

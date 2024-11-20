@@ -1,33 +1,30 @@
-import { hash } from 'bcryptjs';
 import { IsString, IsEnum, IsNumber, MaxLength } from 'class-validator';
-import { BeforeInsert, BeforeUpdate } from 'typeorm';
 
 export enum Rol {
-    ADMINISTRADOR = 'Administrador',
-    EMPLEADO = 'Empleado',
-    CLIENTE = 'Cliente',
+  ADMINISTRADOR = 'Administrador',
+  EMPLEADO = 'Empleado',
+  CLIENTE = 'Cliente',
 }
 
 export enum Estado {
-    ACTIVO = 'Activo',
-    INACTIVO = 'Inactivo',
+  ACTIVO = 'Activo',
+  INACTIVO = 'Inactivo',
 }
 
 export class CreateUsuarioDto {
-    @IsString()
-    password: string;
+  @IsString()
+  password: string;
 
-    @IsString()
-    @MaxLength(100)
-    email:string;
+  @IsString()
+  @MaxLength(100)
+  email: string;
 
-    @IsEnum(Rol)
-    rol: Rol;
+  @IsEnum(Rol)
+  rol: Rol;
 
-    @IsEnum(Estado)
-    estado: Estado;
+  @IsEnum(Estado)
+  estado: Estado;
 
-    @IsNumber()
-    idPersona: number;
-  
+  @IsNumber()
+  idPersona: number;
 }

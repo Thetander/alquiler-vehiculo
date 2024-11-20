@@ -4,12 +4,15 @@ import { DeepPartial, Repository } from 'typeorm';
 import { ClienteEntity } from 'src/clientes/domain/entities/clientes.entity';
 import { CreateClienteDto } from '../dto/create-clientes.dto';
 import { EditClienteDto } from '../dto/update-clientes.dto';
+import { PersonaEntity } from 'personas/domain/entities/personas.entity';
 
 @Injectable()
 export class ClienteService {
     constructor(
         @InjectRepository(ClienteEntity)
         private readonly clienteRepository: Repository<ClienteEntity>,
+        @InjectRepository(PersonaEntity)
+        private readonly personaRepository: Repository<PersonaEntity>,
     ) {}
 
     async getMany() {
@@ -23,10 +26,22 @@ export class ClienteService {
     }
 
     async createOne(dto: CreateClienteDto) {
-        const newCliente = this.clienteRepository.create(dto as DeepPartial<ClienteEntity>);
-        return await this.clienteRepository.save(newCliente);
-    }
-
+        const persona = await this.personaRepository.findOne({
+          where: { idPersona: dto.idPersona },
+        });
+    
+        if (!persona) {
+          throw new NotFoundException('Persona not found');
+        }
+    
+        const cliente = new ClienteEntity();
+        cliente.persona = persona;
+    
+        return await this.clienteRepository.save(cliente);
+      }
+    
+    
+      
     async editOne(id: number, dto: EditClienteDto) {
         const cliente = await this.getOne(id);
         const editedCliente = Object.assign(cliente, dto);
