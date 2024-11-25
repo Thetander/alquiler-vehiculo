@@ -5,6 +5,7 @@ import { UsuarioEntity } from 'src/usuarios/domain/entities/usuarios.entity';
 import { CreateUsuarioDto } from 'src/usuarios/applications/dto/create-usuarios.dto';
 import { EditUsuarioDto } from 'src/usuarios/applications/dto/update-usuarios.dto';
 import { PersonaEntity } from 'src/personas/domain/entities/personas.entity';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsuarioService {
@@ -57,5 +58,9 @@ export class UsuarioService {
   async deleteOne(id: number) {
     const usuario = await this.getOne(id);
     return await this.usuarioRepository.remove(usuario);
+  }
+  async updatePassword(idUsuario: number, newPassword: string): Promise<void> {
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await this.usuarioRepository.update(idUsuario, { password: hashedPassword });
   }
 }

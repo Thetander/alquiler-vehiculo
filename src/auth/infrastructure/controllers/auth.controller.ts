@@ -5,6 +5,7 @@ import { LoginDto } from '../../applications/dto/login.dto';
 import { Auth } from 'src/common/decorators/helpers/auth.decorator';
 import { UsuarioEntity } from '../../../usuarios/domain/entities/usuarios.entity';
 import { Usuario } from '../../../common/decorators/helpers';
+import { RecoverPasswordDto } from '../../applications/dto/recover-password.dto';
 
 @ApiTags('Authentication')
 @Controller('auth')
@@ -15,6 +16,13 @@ export class AuthController {
   @ApiBody({ type: LoginDto })  
   async login(@Body() loginDto: LoginDto) {
     return this.authService.login(loginDto);
+  }
+
+  @Post('recover-password')
+  @ApiBody({ type: RecoverPasswordDto }) 
+  async recoverPassword(@Body() dto: RecoverPasswordDto): Promise<any> {
+    await this.authService.recoverPassword(dto.email);
+    return { message: 'Se ha enviado una nueva contraseña al correo registrado' };
   }
 
   @Auth()

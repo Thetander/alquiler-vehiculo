@@ -9,16 +9,16 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
         private readonly authService: AuthService
     ) {
         super({
-            usernameField: 'idPersona',  // Campo usado en lugar de 'email'
-            passwordField: 'password'
+            usernameField: 'email',
+            passwordField: 'password',
         });
     }
 
-    async validate(email:string, password: string) {
-        const employeed = await this.authService.validateUser(email, password);
-        console.log(email, password);
+    async validate(email: string, password: string) {
+        const user = await this.authService.validateUser(email, password);
 
-        if (!employeed) throw new UnauthorizedException('Login User or password does not match');
-        return employeed;
+        if (!user) throw new UnauthorizedException('Email o contraseña incorrectos');
+        return user;
     }
 }
+
