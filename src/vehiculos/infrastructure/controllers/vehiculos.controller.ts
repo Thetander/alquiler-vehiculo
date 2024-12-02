@@ -6,6 +6,9 @@ import { EditVehiculoDto } from 'src/vehiculos/applications/dto/update-vehiculos
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { plainToInstance } from 'class-transformer';
+import { validate } from 'class-validator';
+import { BadRequestException } from '@nestjs/common';
 
 @ApiTags('vehiculos')
 @Controller('vehiculos')
@@ -26,22 +29,44 @@ export class VehiculoController {
     }
 
     @Post()
-    @UseInterceptors(FileInterceptor('file', {
-        storage: diskStorage({
-            destination: './assets',
-            filename: (req, file, cb) => {
-                const randomName = Array(32).fill(null).map(() => Math.round(Math.random() * 16).toString(16)).join('');
-                cb(null, `${randomName}${extname(file.originalname)}`);
-            }
-        })
-    }))
-    async createOne(@UploadedFile() file: Express.Multer.File, @Body() dto: CreateVehiculoDto) {
+@UseInterceptors(FileInterceptor('file', {
+    storage: diskStorage({
+        destination: './assets',
+        filename: (req, file, cb) => {
+            const randomName = Array(32).fill(null).map(() => Math.round(Math.random() * 16).toString(16)).join('');
+            cb(null, `${randomName}${extname(file.originalname)}`);
+        }
+    }),
+}))
+async createOne(
+    @UploadedFile() file: Express.Multer.File, 
+    @Body('vehiculo') vehiculoJson: string
+) {
+    try {
+        // Parsear el JSON y transformarlo en una instancia del DTO
+        const rawDto = JSON.parse(vehiculoJson);
+        const dto = plainToInstance(CreateVehiculoDto, rawDto);
+
+        // Validar los datos
+        const errors = await validate(dto);
+        if (errors.length > 0) {
+            console.error('Errores de validación:', errors);
+            throw new BadRequestException(errors);
+        }
+
+        // Agregar el nombre del archivo al DTO, si se subió un archivo
         if (file) {
             dto.imagen = `${file.filename}`;
         }
+
+        // Llamar al servicio para crear el vehículo
         const data = await this.vehiculoService.createOne(dto);
-        return { message: 'Vehiculo created with image', data };
+        return { message: 'Vehículo creado con éxito', data };
+    } catch (error) {
+        console.error('Error al crear vehículo:', error);
+        throw new BadRequestException('Error al procesar la solicitud');
     }
+}
 
     @Put(':id')
     async editOne(@Param('id') id: number, @Body() dto: EditVehiculoDto) {

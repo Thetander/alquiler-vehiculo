@@ -56,5 +56,5 @@ export class CreateVehiculoDto {
     @IsOptional()
     @IsString()
     @MaxLength(255)
-    imagen?: string;
+    imagen?: string;    
 }
