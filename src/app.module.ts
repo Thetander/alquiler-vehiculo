@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppService } from './app.service';
@@ -34,6 +34,7 @@ import { MarcaController } from './marca/infrastructure/controllers/marca.contro
 import { ModeloService } from './modelo/applications/service/modelo.service';
 import { ModeloController } from './modelo/infrastructure/controllers/modelo.controller';
 import { ModeloModule } from './modelo/applications/modules/modelo.module';
+import { LoggerMiddleware } from 'common/middlewares/logger.middleware';
 
 @Module({
   imports: [
@@ -93,4 +94,8 @@ import { ModeloModule } from './modelo/applications/modules/modelo.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+      consumer.apply(LoggerMiddleware).forRoutes('*'); 
+  }
+}
