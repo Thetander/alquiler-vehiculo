@@ -2,7 +2,8 @@ import { Controller, Get, Post, Put, Delete, Param, Body, ParseIntPipe } from '@
 import { ReservaAlquilerService } from '../../applications/services/reserva-alquiler.service';
 import { CreateReservaAlquilerDto } from '../../applications/dto/create-reserva-alquiler.dto';
 import { EditReservaAlquilerDto } from '../../applications/dto/update-reserva-alquiler.dto';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('reserva-alquiler')
 @Controller('reserva-alquiler')
 export class ReservaAlquilerController {
   constructor(private readonly reservaAlquilerService: ReservaAlquilerService) {}
