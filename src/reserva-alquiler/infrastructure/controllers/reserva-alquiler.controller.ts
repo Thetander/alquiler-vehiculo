@@ -5,6 +5,8 @@ import { EditReservaAlquilerDto } from '../../applications/dto/update-reserva-al
 import { ApiTags } from '@nestjs/swagger';
 @ApiTags('reserva-alquiler')
 @Controller('reserva-alquiler')
+@Controller('reserva-alquiler')
+
 export class ReservaAlquilerController {
   constructor(private readonly reservaAlquilerService: ReservaAlquilerService) {}
 

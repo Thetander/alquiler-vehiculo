@@ -37,6 +37,7 @@ export class ReservaAlquilerService {
       estadoAlquiler: dto.estadoAlquiler,
       costoAdicionalAnomalias: dto.costoAdicionalAnomalias,
       montoTotal: dto.montoTotal,
+      tipoPago: dto.tipoPago, 
     });
     return await this.reservaAlquilerRepository.save(newReserva);
   }

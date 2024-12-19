@@ -32,4 +32,8 @@ export class CreateReservaAlquilerDto {
   @IsNotEmpty()
   @IsNumber()
   montoTotal: number;
+
+  @IsNotEmpty()
+  @IsEnum(['Efectivo', 'Tarjeta', 'Transferencia'])
+  tipoPago: string;
 }
