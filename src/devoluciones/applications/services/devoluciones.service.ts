@@ -4,19 +4,33 @@ import { Repository } from 'typeorm';
 import { DevolucionEntity } from '../../domain/entities/devoluciones.entity';
 import { CreateDevolucionDto } from '../dto/create-devoluciones.dto';
 import { EditDevolucionDto } from '../dto/update-devoluciones.dto';
+import { VehiculoService } from 'vehiculos/applications/services/vehiculos.service';
 
 @Injectable()
 export class DevolucionService {
   constructor(
     @InjectRepository(DevolucionEntity)
     private readonly devolucionRepository: Repository<DevolucionEntity>,
+    private readonly vehiculoService: VehiculoService, // Inyectamos el servicio de vehículos
+
   ) {}
 
-  async getMany(): Promise<DevolucionEntity[]> {
-    return await this.devolucionRepository.find({
-      relations: ['reservaAlquiler'], // Incluye la relación con reserva de alquiler
+ 
+  async getMany(): Promise<any[]> {
+    const devoluciones = await this.devolucionRepository.find({
+      relations: ['reservaAlquiler', 'reservaAlquiler.vehiculo'], // Asegúrate de incluir la relación "vehiculo"
     });
+  
+    const devolucionesExtendidas = devoluciones.map((devolucion) => ({
+      ...devolucion,
+      vehiculo: devolucion.reservaAlquiler.vehiculo, // Incluye el objeto vehículo completo
+    }));
+  
+    return devolucionesExtendidas;
   }
+  
+
+  
 
   async getOne(id: number): Promise<DevolucionEntity> {
     const devolucion = await this.devolucionRepository.findOne({

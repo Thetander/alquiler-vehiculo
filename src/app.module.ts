@@ -7,7 +7,7 @@ import { DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_PORT, DATABAS
 import { CargosModule } from './cargos/applications/modules/cargos.module';
 import { CiudadesModule } from './ciudades/applications/modules/ciudades.module';
 import { ClientesModule } from './clientes/applications/modules/clientes.module';
-import { DevolucionesModule } from './devoluciones/applications/modules/devoluciones.module';
+import { DevolucionModule } from './devoluciones/applications/modules/devoluciones.module';
 import { DireccionesModule } from './direcciones/applications/modules/direcciones.module';
 import { EmpleadosModule } from './empleados/applications/modules/empleados.module';
 import { EstadosVehiculosModule } from './estados-vehiculos/applications/modules/estados-vehiculos.module';
@@ -69,7 +69,7 @@ import { LoggerMiddleware } from 'common/middlewares/logger.middleware';
     CargosModule,
     CiudadesModule,
     ClientesModule,
-    DevolucionesModule,
+    DevolucionModule,
     DireccionesModule,
     EmpleadosModule,
     EstadosVehiculosModule,
