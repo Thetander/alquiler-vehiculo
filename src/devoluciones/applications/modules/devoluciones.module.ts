@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
-
-import { DevolucionesController } from '../../infrastructure/controllers/devoluciones.controller';
-import { DevolucionEntity } from 'src/devoluciones/domain/entities/devoluciones.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { DevolucionEntity } from '../../domain/entities/devoluciones.entity';
+import { DevolucionService } from '../services/devoluciones.service';
+import { DevolucionController } from '../../infrastructure/controllers/devoluciones.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([DevolucionEntity])],
-  controllers: [DevolucionesController]
+  providers: [DevolucionService],
+  controllers: [DevolucionController],
+  exports: [DevolucionService],
 })
-export class DevolucionesModule {}
+export class DevolucionModule {}
