@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, NotFoundException } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ClienteService } from '../../applications/services/clientes.service';
 import { CreateClienteDto } from '../../applications/dto/create-clientes.dto';
@@ -20,6 +20,16 @@ export class ClienteController {
         const data = await this.clienteService.getOne(id);
         return { data };
     }
+
+    @Get('cedula/:cedula')
+    async getClienteByCedula(@Param('cedula') cedula: string) {
+      const cliente = await this.clienteService.findByCedula(cedula);
+      if (!cliente) {
+        throw new NotFoundException('Cliente no encontrado');
+      }
+      return cliente;
+    }
+  
 
     @Post()
     async createOne(@Body() dto: CreateClienteDto) {

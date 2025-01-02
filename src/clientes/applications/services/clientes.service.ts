@@ -25,6 +25,27 @@ export class ClienteService {
         return cliente;
     }
 
+    async findByCedula(cedula: string) {
+        // persona por cédula
+        const persona = await this.personaRepository.findOne({ where: { cedula } });
+        if (!persona) {
+          throw new NotFoundException('Persona no encontrada');
+        }
+      
+        // cliente asociado a la persona
+        const cliente = await this.clienteRepository.findOne({
+          where: { persona: { idPersona: persona.idPersona } },
+          relations: ['persona'], 
+        });
+      
+        if (!cliente) {
+          throw new NotFoundException('Cliente no encontrado');
+        }
+      
+        return cliente;
+      }
+      
+
     async createOne(dto: CreateClienteDto) {
         const persona = await this.personaRepository.findOne({
           where: { idPersona: dto.idPersona },
