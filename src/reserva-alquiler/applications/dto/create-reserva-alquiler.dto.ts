@@ -29,11 +29,13 @@ export class CreateReservaAlquilerDto {
   @IsNumber()
   costoAdicionalAnomalias?: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
-  montoTotal: number;
+  montoTotal?: number;
 
   @IsNotEmpty()
   @IsEnum(['Efectivo', 'Tarjeta', 'Transferencia'])
   tipoPago: string;
+
+
 }

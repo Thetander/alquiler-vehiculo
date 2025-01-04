@@ -3,8 +3,8 @@ import { HistorialFacturaService } from '../../applications/services/historial-f
 import { CreateHistorialFacturaDto } from '../../applications/dto/create-historial-facturas.dto';
 import { EditHistorialFacturaDto } from '../../applications/dto/update-historial-facturas.dto';
 import { ApiTags } from '@nestjs/swagger';
+@ApiTags('historial-factura')
 
-ApiTags('historial-factura')
 @Controller('historial-factura')
 export class HistorialFacturaController {
   constructor(private readonly historialFacturaService: HistorialFacturaService) {}

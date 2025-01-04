@@ -2,7 +2,9 @@ import { Controller, Get, Post, Patch, Delete, Param, Body, ParseIntPipe } from 
 import { DevolucionService } from '../../applications/services/devoluciones.service';
 import { CreateDevolucionDto } from '../../applications/dto/create-devoluciones.dto';
 import { EditDevolucionDto } from '../../applications/dto/update-devoluciones.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('devoluciones')
 @Controller('devoluciones')
 export class DevolucionController {
   constructor(private readonly devolucionService: DevolucionService) {}
