@@ -81,17 +81,22 @@ export class ReservaAlquilerService {
   }
   
 
-  async actualizarCostoAdicional(idReserva: number, costoAdicional: number): Promise<ReservaAlquilerEntity> {
-    const reserva = await this.getOne(idReserva);
+  async actualizarCostoAdicional(id: number, nuevoCostoAdicional: number): Promise<ReservaAlquilerEntity> {
+    const reserva = await this.reservaAlquilerRepository.findOneBy({ idAlquiler: id });
+  
     if (!reserva) {
-      throw new Error('Reserva no encontrada.');
+      throw new NotFoundException('Reserva no encontrada');
     }
   
-    reserva.costoAdicionalAnomalias = costoAdicional;
-    reserva.montoTotal += costoAdicional;
+    // Manejo del cálculo del monto total
+    const costoAnterior = reserva.costoAdicionalAnomalias || 0; // Usaba un valor por defecto
+    reserva.montoTotal = +(reserva.montoTotal - costoAnterior + nuevoCostoAdicional).toFixed(2); // Error posible por mezcla de tipos
+    reserva.costoAdicionalAnomalias = nuevoCostoAdicional;
   
-    return await this.reservaAlquilerRepository.save(reserva);
+    return this.reservaAlquilerRepository.save(reserva);
   }
+  
+  
   
 
 

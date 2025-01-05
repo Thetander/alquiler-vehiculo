@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, ParseIntPipe, BadRequestException } from '@nestjs/common';
 import { ReservaAlquilerService } from '../../applications/services/reserva-alquiler.service';
 import { CreateReservaAlquilerDto } from '../../applications/dto/create-reserva-alquiler.dto';
 import { EditReservaAlquilerDto } from '../../applications/dto/update-reserva-alquiler.dto';
 
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ReservaAlquilerEntity } from 'reserva-alquiler/domain/entities/reserva-alquiler.entity';
+import { UpdateCostoAdicionalDto } from 'reserva-alquiler/applications/dto/update-costo-adicional.dto';
 @ApiTags('reserva-alquiler')
 @Controller('reserva-alquiler')
 export class ReservaAlquilerController {
@@ -37,12 +39,14 @@ export class ReservaAlquilerController {
     return await this.reservaAlquilerService.delete(id);
   }
 
-@Put(':id/costo-adicional')
-async actualizarCostoAdicional(
-  @Param('id', ParseIntPipe) id: number,
-  @Body('costoAdicional') costoAdicional: number,
-) {
-  return await this.reservaAlquilerService.actualizarCostoAdicional(id, costoAdicional);
-}
-
+  @Put(':id/costo-adicional')
+  async actualizarCostoAdicional(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateCostoAdicionalDto, // Usa el DTO aquí
+  ): Promise<ReservaAlquilerEntity> {
+    const { costoAdicional } = dto;
+    return this.reservaAlquilerService.actualizarCostoAdicional(id, costoAdicional);
+  }
+  
+  
 }
