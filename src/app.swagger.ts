@@ -4,7 +4,14 @@ import { INestApplication } from '@nestjs/common';
 export const initSwagger = (app: INestApplication) => {
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Vehiculos_Alquiler')
-    .addBearerAuth()
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+      'access-token', 
+    )
     .setDescription(
       'Vehiculos_Alquiler',
     )

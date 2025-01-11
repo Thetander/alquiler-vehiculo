@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { UsuarioService } from '../../../usuarios/applications/services/usuarios.service';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from '../../applications/dto/login.dto';
@@ -9,6 +9,7 @@ import * as nodemailer from 'nodemailer';
 @Injectable()
 export class AuthService {
   constructor(
+    @Inject(forwardRef(() => UsuarioService))
     private readonly usuarioService: UsuarioService,
     private readonly jwtService: JwtService,
   ) {}

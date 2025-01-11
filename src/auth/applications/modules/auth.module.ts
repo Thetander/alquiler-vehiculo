@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { AuthService } from '../../domain/services/auth.service';
 import { AuthController } from '../../infrastructure/controllers/auth.controller';
 import { PassportModule } from '@nestjs/passport';
@@ -8,6 +8,8 @@ import { JwtStrategy, LocalStrategy } from '../../infrastructure/strategy/index'
 import { PersonasModule } from '../../../personas/applications/modules/personas.module';
 import { UsuariosModule } from '../../../usuarios/applications/modules/usuarios.module';  
 import { JWT_SECRET } from '../../../config/constans';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from 'auth/infrastructure/guards/roles.guard';
 
 @Module({
   imports: [
@@ -15,7 +17,7 @@ import { JWT_SECRET } from '../../../config/constans';
       defaultStrategy: 'jwt',
     }),
     PersonasModule,
-    UsuariosModule,  
+    forwardRef(() => UsuariosModule),
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
@@ -25,7 +27,12 @@ import { JWT_SECRET } from '../../../config/constans';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy,
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
   exports: [AuthService, JwtModule],
 })
 export class AuthModule {}
