@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsEnum, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsEnum, IsNumber, IsDateString } from 'class-validator';
 
 export class CreateAdministradorDto {
   @IsNotEmpty()
@@ -12,4 +12,8 @@ export class CreateAdministradorDto {
   @IsNotEmpty()
   @IsEnum(['Activo', 'Inactivo'])
   estado: string;
+
+  @IsNotEmpty()
+  @IsDateString()
+  fechaRegistro: string;
 }

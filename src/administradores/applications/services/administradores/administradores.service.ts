@@ -20,23 +20,23 @@ export class AdministradoresService {
 
   // Crear un nuevo administrador
   async create(createAdministradorDto: CreateAdministradorDto): Promise<AdministradorEntity> {
-    const { idPersona, idCargo, estado } = createAdministradorDto;
-  
-    const persona = await this.personaRepository.findOne({ where: { idPersona } });
+    const { idPersona, idCargo, estado, fechaRegistro } = createAdministradorDto;
+
+    const persona = await this.personaRepository.findOneBy({ idPersona });
     if (!persona) throw new NotFoundException('Persona no encontrada');
-  
-    const cargo = await this.cargoRepository.findOne({ where: { idCargo } });
+
+    const cargo = await this.cargoRepository.findOneBy({ idCargo });
     if (!cargo) throw new NotFoundException('Cargo no encontrado');
-  
+
     const administrador = this.administradorRepository.create({
       persona,
       cargo,
       estado,
+      fechaRegistro: new Date(fechaRegistro),
     });
-  
+
     return this.administradorRepository.save(administrador);
   }
-  
 
   // Obtener todos los administradores
   async findAll(): Promise<AdministradorEntity[]> {
