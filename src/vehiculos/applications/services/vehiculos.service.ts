@@ -46,6 +46,16 @@ export class VehiculoService {
         return await this.vehiculoRepository.find({ where: { tipoVehiculo: { idTipoVehiculo: filter } } });
     }
 
+    async getModelosByMarca(idMarca: number) {
+        return await this.vehiculoRepository.manager.find(ModeloEntity, {
+            where: {
+                marca: { idMarca }, // Usar la relación 'marca'
+            },
+        });
+    }
+    
+      
+
     async getOne(idVehiculo: number) {
         const vehiculo = await this.vehiculoRepository.findOne({ where: { idVehiculo } });
         if (!vehiculo) throw new NotFoundException('Vehiculo not found');

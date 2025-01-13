@@ -5,7 +5,6 @@ import { PersonaEntity } from 'src/personas/domain/entities/personas.entity';
 export class ClienteEntity {
     @PrimaryGeneratedColumn()
     idCliente: number;
-
     @ManyToOne(() => PersonaEntity)
     @JoinColumn({ name: 'idPersona' })
     persona: PersonaEntity;

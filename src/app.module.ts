@@ -1,3 +1,4 @@
+import { PagosModule } from './pagos/applications/modules/pagos.module';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -66,6 +67,7 @@ import { LoggerMiddleware } from 'common/middlewares/logger.middleware';
       isGlobal: true,
       envFilePath: '.env',
     }),
+    PagosModule,
     CargosModule,
     CiudadesModule,
     ClientesModule,

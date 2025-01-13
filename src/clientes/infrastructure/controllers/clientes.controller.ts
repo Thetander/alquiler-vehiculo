@@ -15,6 +15,7 @@ export class ClienteController {
         return { data };
     }
 
+
     @Get(':id')
     async getOne(@Param('id') id: number) {
         const data = await this.clienteService.getOne(id);

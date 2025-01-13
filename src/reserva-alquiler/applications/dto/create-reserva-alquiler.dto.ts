@@ -34,7 +34,7 @@ export class CreateReservaAlquilerDto {
   montoTotal?: number;
 
   @IsNotEmpty()
-  @IsEnum(['Efectivo', 'Tarjeta', 'Transferencia'])
+  @IsEnum(['Efectivo', 'Tarjeta', 'Transferencia','PayPal'])
   tipoPago: string;
 
 
