@@ -1,11 +1,11 @@
-import { MaxLength, IsString, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateCargoDto {
-    @IsString()
-    @MaxLength(100)
-    nombre: string;
+  @IsNotEmpty()
+  @IsString()
+  nombre: string;
 
-    @IsOptional()
-    @IsString()
-    descripcion?: string;
+  @IsNotEmpty()
+  @IsString()
+  descripcion: string;
 }

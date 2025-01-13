@@ -15,6 +15,10 @@ export class ClienteController {
         return { data };
     }
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 55048c13cf0472e818fd8cf1dde3fcc7f04a3606
 
     @Get(':id')
     async getOne(@Param('id') id: number) {

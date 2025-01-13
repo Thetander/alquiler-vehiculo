@@ -36,6 +36,7 @@ import { ModeloService } from './modelo/applications/service/modelo.service';
 import { ModeloController } from './modelo/infrastructure/controllers/modelo.controller';
 import { ModeloModule } from './modelo/applications/modules/modelo.module';
 import { LoggerMiddleware } from 'common/middlewares/logger.middleware';
+import { AdministradoresModule } from './administradores/administradores.module';
 
 @Module({
   imports: [
@@ -91,6 +92,7 @@ import { LoggerMiddleware } from 'common/middlewares/logger.middleware';
     ColorModule,
     MarcaModule,
     ModeloModule,
+    AdministradoresModule,
 
   ],
   controllers: [AppController],
