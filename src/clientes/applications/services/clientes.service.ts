@@ -16,14 +16,21 @@ export class ClienteService {
     ) {}
 
     async getMany() {
-        return await this.clienteRepository.find();
-    }
+      return await this.clienteRepository.find({
+          relations: ['persona'], 
+      });
+  }
+  
 
     async getOne(idCliente: number) {
-        const cliente = await this.clienteRepository.findOne({ where: { idCliente } });
-        if (!cliente) throw new NotFoundException('Cliente not found');
-        return cliente;
-    }
+      const cliente = await this.clienteRepository.findOne({
+          where: { idCliente },
+          relations: ['persona'], 
+      });
+      if (!cliente) throw new NotFoundException('Cliente not found');
+      return cliente;
+  }
+  
 
     async findByCedula(cedula: string) {
         // persona por cédula

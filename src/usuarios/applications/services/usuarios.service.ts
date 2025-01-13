@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UsuarioEntity } from 'src/usuarios/domain/entities/usuarios.entity';
 import { CreateUsuarioDto } from 'src/usuarios/applications/dto/create-usuarios.dto';
-import { EditUsuarioDto } from 'src/usuarios/applications/dto/update-usuarios.dto';
+import {  UpdateUsuarioDto } from 'src/usuarios/applications/dto/update-usuarios.dto';
 import { PersonaEntity } from 'src/personas/domain/entities/personas.entity';
 import * as bcrypt from 'bcryptjs';
 
@@ -49,16 +49,26 @@ export class UsuarioService {
     return await this.usuarioRepository.save(newUsuario);
   }
 
-  async editOne(id: number, dto: EditUsuarioDto) {
-    const usuario = await this.getOne(id);
-    const editedUsuario = Object.assign(usuario, dto);
-    return await this.usuarioRepository.save(editedUsuario);
+  async update(id: number, updateUsuarioDto: UpdateUsuarioDto): Promise<UsuarioEntity> {
+    const usuario = await this.usuarioRepository.preload({
+      idUsuario: id,
+      ...updateUsuarioDto,
+    });
+    if (!usuario) {
+      throw new NotFoundException(`Usuario con ID ${id} no encontrado`);
+    }
+    return this.usuarioRepository.save(usuario);
   }
+  
 
-  async deleteOne(id: number) {
-    const usuario = await this.getOne(id);
-    return await this.usuarioRepository.remove(usuario);
+  async remove(id: number): Promise<void> {
+    const usuario = await this.usuarioRepository.findOneBy({ idUsuario: id });
+    if (!usuario) {
+      throw new NotFoundException(`Usuario con ID ${id} no encontrado`);
+    }
+    await this.usuarioRepository.remove(usuario);
   }
+  
   async updatePassword(idUsuario: number, newPassword: string): Promise<void> {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     await this.usuarioRepository.update(idUsuario, { password: hashedPassword });
