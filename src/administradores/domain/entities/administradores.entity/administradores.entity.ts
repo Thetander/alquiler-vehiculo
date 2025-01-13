@@ -1,17 +1,20 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column } from 'typeorm';
 import { PersonaEntity } from 'src/personas/domain/entities/personas.entity';
+import { CargoEntity } from 'src/cargos/domain/entities/cargos.entity';
 
 @Entity('administradores')
 export class AdministradorEntity {
   @PrimaryGeneratedColumn()
   idAdministrador: number;
 
-  @ManyToOne(() => PersonaEntity)
+  @ManyToOne(() => PersonaEntity, { eager: true })
   @JoinColumn({ name: 'idPersona' })
   persona: PersonaEntity;
 
-  @Column({ type: 'varchar', length: 100, nullable: false })
-  cargo: string;
+  @ManyToOne(() => CargoEntity, { eager: true })
+  @JoinColumn({ name: 'idCargo' })
+  cargo: CargoEntity;
+  
 
   @Column({ type: 'enum', enum: ['Activo', 'Inactivo'], default: 'Activo' })
   estado: string;

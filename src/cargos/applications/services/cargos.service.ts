@@ -1,40 +1,44 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CargoEntity } from '../../domain/entities/cargos.entity';
 import { CreateCargoDto } from '../dto/create-cargos.dto';
-import { EditCargoDto } from '../dto/update-cargos.dto';
-import { CargoEntity } from 'src/cargos/domain/entities/cargos.entity';
+import { UpdateCargoDto } from '../dto/update-cargos.dto';
 
 @Injectable()
-export class CargoService {
-    constructor(
-        @InjectRepository(CargoEntity)
-        private readonly cargoRepository: Repository<CargoEntity>,
-    ) {}
+export class CargosService {
+  constructor(
+    @InjectRepository(CargoEntity)
+    private readonly cargosRepository: Repository<CargoEntity>,
+  ) {}
 
-    async getMany() {
-        return await this.cargoRepository.find();
-    }
+  async create(createCargoDto: CreateCargoDto): Promise<CargoEntity> {
+    const newCargo = this.cargosRepository.create(createCargoDto);
+    return await this.cargosRepository.save(newCargo);
+  }
 
-    async getOne(idCargo: number) {
-        const cargo = await this.cargoRepository.findOne({ where: { idCargo} });
-        if (!cargo) throw new NotFoundException('Cargo not found');
-        return cargo;
-    }
+  async findAll(): Promise<CargoEntity[]> {
+    return await this.cargosRepository.find();
+  }
 
-    async createOne(dto: CreateCargoDto) {
-        const newCargo = this.cargoRepository.create(dto);
-        return await this.cargoRepository.save(newCargo);
+  async findOne(id: number): Promise<CargoEntity> {
+    const cargo = await this.cargosRepository.findOne({ where: { idCargo: id } });
+    if (!cargo) {
+      throw new NotFoundException(`Cargo con ID ${id} no encontrado.`);
     }
+    return cargo;
+  }
 
-    async editOne(id: number, dto: EditCargoDto) {
-        const cargo = await this.getOne(id);
-        const editedCargo = Object.assign(cargo, dto);
-        return await this.cargoRepository.save(editedCargo);
-    }
+  async update(id: number, updateCargoDto: UpdateCargoDto): Promise<CargoEntity> {
+    const cargo = await this.findOne(id);
+    Object.assign(cargo, updateCargoDto);
+    return await this.cargosRepository.save(cargo);
+  }
 
-    async deleteOne(id: number) {
-        const cargo = await this.getOne(id);
-        return await this.cargoRepository.remove(cargo);
+  async remove(id: number): Promise<void> {
+    const result = await this.cargosRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Cargo con ID ${id} no encontrado.`);
     }
+  }
 }

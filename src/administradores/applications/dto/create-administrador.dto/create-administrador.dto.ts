@@ -1,14 +1,15 @@
-import { IsNotEmpty, IsString, IsEnum } from 'class-validator';
+import { IsNotEmpty, IsString, IsEnum, IsNumber } from 'class-validator';
 
 export class CreateAdministradorDto {
   @IsNotEmpty()
-  @IsString()
-  cargo: string;
+  @IsNumber()
+  idPersona: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  idCargo: number;
 
   @IsNotEmpty()
   @IsEnum(['Activo', 'Inactivo'])
   estado: string;
-
-  @IsNotEmpty()
-  idPersona: number;
 }

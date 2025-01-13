@@ -1,4 +1,4 @@
-import { PartialType } from '@nestjs/mapped-types';
+import { PartialType } from '@nestjs/swagger';
 import { CreateCargoDto } from '../dto/create-cargos.dto';
 
-export class EditCargoDto extends PartialType(CreateCargoDto) {}
+export class UpdateCargoDto extends PartialType(CreateCargoDto) {}

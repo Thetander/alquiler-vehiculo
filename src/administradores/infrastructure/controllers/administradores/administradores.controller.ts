@@ -21,6 +21,6 @@ export class AdministradoresController {
 
   @Delete(':id')
   async delete(@Param('id') id: number) {
-    return await this.administradoresService.delete(id);
+    return await this.administradoresService.remove(id);
   }
 }
