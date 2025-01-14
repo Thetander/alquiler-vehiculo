@@ -21,8 +21,9 @@ export class UsuarioService {
   }
 
   async getOne(idUsuario: number) {
-    const usuario = await this.usuarioRepository.findOne({ where: { idUsuario } });
+    const usuario = await this.usuarioRepository.findOne({ where: { idUsuario }, relations: ['persona'],  });
     if (!usuario) throw new NotFoundException('Usuario not found');
+    
     return usuario;
   }
 

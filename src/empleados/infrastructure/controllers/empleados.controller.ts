@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, NotFoundException } from '@nestjs/common';
 import { EmpleadosService } from '../../applications/services/empleados.service';
 import { CreateEmpleadoDto } from '../../applications/dto/create-empleados.dto';
 import { UpdateEmpleadoDto } from '../../applications/dto/update-empleados.dto';
@@ -23,6 +23,17 @@ export class EmpleadosController {
   findOne(@Param('id') id: number) {
     return this.empleadosService.findOne(id);
   }
+
+
+  @Get('persona/:idPersona')
+  async getEmpleadoByPersona(@Param('idPersona') idPersona: number) {
+    const empleado = await this.empleadosService.findByPersonaId(idPersona);
+    if (!empleado) {
+      throw new NotFoundException('Empleado no encontrado');
+    }
+    return empleado;
+  }
+
 
   @Put(':id')
   update(@Param('id') id: number, @Body() updateEmpleadoDto: UpdateEmpleadoDto) {

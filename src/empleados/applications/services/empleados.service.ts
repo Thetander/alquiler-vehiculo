@@ -67,4 +67,11 @@ export class EmpleadosService {
     const empleado = await this.findOne(id);
     return this.empleadoRepository.remove(empleado);
   }
+
+  async findByPersonaId(idPersona: number): Promise<EmpleadoEntity | null> {
+    return await this.empleadoRepository.findOne({
+      where: { persona: { idPersona } },
+      relations: ['persona'],
+    });
+  }
 }
