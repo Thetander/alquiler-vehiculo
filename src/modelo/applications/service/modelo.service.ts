@@ -36,4 +36,8 @@ export class ModeloService {
         const modelo = await this.getOne(id);
         return await this.modeloRepository.remove(modelo);
     }
+
+    async getModelosByMarca(idMarca: number) {
+        return this.modeloRepository.find({ where: { marca: { idMarca } } });
+    }
 }

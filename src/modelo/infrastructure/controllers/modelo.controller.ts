@@ -37,4 +37,10 @@ export class ModeloController {
         const data = await this.modeloService.deleteOne(id);
         return { message: 'Modelo deleted', data };
     }
+
+    @Get('marca/:idMarca')
+    async getModelosByMarca(@Param('idMarca') idMarca: number) {
+        const data = await this.modeloService.getModelosByMarca(idMarca);
+        return { data };
+    }
 }
